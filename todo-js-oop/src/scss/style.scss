@@ -1,7 +1,8 @@
 
 .app {
-  width: max-content;
-  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 .todo-list {
@@ -45,7 +46,7 @@
   margin: 5px;
 
 
-  &__status {}
+  &__checkbox {}
 
   &__name {
 
