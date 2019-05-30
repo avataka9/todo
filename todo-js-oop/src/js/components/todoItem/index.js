@@ -20,12 +20,7 @@ export class TodoItem {
 	getContainer() {
 		return this._container;
 	}
-	
-	setDeleteHandler(handler) {
-		this.deleteSelf = handler;
-		console.log(handler)
-	}
-	
+
 	// deleteSelf() {
 	// 	this._nearParent.removeChild(this._container)
 	// }
@@ -55,8 +50,8 @@ export class TodoItem {
 		deleteButton.className = 'todo-item__delete';
 		deleteButton.type = 'button';
 		deleteButton.value = 'delete';
-		deleteButton.onclick = this.deleteSelf;
-		
+		deleteButton.onclick = this.deleteHandler;
+
 		this._container.appendChild(checkbox);
 		this._container.appendChild(name);
 		this._container.appendChild(description);

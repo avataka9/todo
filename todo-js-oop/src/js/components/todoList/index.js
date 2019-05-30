@@ -25,22 +25,23 @@ export class TodoList {
 			name: name,
       description: description,
       finished: finished
-		}).render();
-		todo.setDeleteHandler = this.deleteTodo(todo.getContainer());
-		return todo.getContainer();
+		});
+		let todoContainer = todo.getContainer();
+		todo.deleteHandler = this.deleteTodo.bind(this, todoContainer);
+		todo.render();
+		return todoContainer;
   };
   
-  deleteTodo(child) {
-    console.log(this._container.children[1]);
-    console.log(child);
-    
-    return function() {this._container.children[1].removeChild(child)};
+  deleteTodo(child,event) {
+
+    this._container.children[1].removeChild(child);
   }
   
   createNewTodoFromEvent(event) {
     let name = event.target.firstElementChild.value;
     let todo = this.createNewTodo(name);
 		this._container.children[1].appendChild(todo);
+    event.target.firstElementChild.value = '';
 		event.preventDefault();
 	};
 	

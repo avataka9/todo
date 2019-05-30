@@ -1,32 +1,66 @@
 import "./../scss/normalize.scss";
 import "./../scss/core.scss";
 import "./../scss/style.scss";
+import "./../img/plus.svg";
 'use strict';
 
 export class TodoApp {
 	constructor (config) {
 		this._TodoList = config.TodoList;
 		this._TodoItem = config.TodoItem;
+    this._addButtonHandler = this._addButtonHandler.bind(this);
 		this._container = this._createContainer();
+		this._wrapper = this._container.firstElementChild.firstElementChild.firstElementChild;
 	}
 	
 	_createContainer() {
-		let elem = document.createElement('div');
-		elem.className = 'app';
-		return elem;
+		let app = document.createElement('div');
+		app.className = 'app';
+    let body = document.createElement('div');
+    body.className = 'app__body swiper-wrapper';
+		let wrapper = document.createElement('div');
+		wrapper.className = 'app__wrapper swiper-slide';
+    let lists = document.createElement('div');
+    lists.className = 'app__lists';
+		let add = document.createElement('div');
+		add.className = 'app__add-list';
+		add.innerHTML = `<img class="app__plus" src="./../img/plus.svg">`;
+		add.onclick = this._addButtonHandler;
+
+		body.appendChild(wrapper);
+		wrapper.appendChild(lists);
+		wrapper.appendChild(add);
+		app.appendChild(body);
+
+		return app;
 	}
 	
 	getContainer() {
 		return this._container;
 	}
+
+	_addButtonHandler(event) {
+		if (event.type === "click") {
+      this._wrapper.appendChild(this.createList().getContainer());
+      this._container.dispatchEvent(new Event('needToUpdateSlider', {bubbles: true}));
+		} else if (event.type === "mouseenter") {
+
+		} else if (event.type === "mouseleave") {
+
+    }
+	}
+
+	createList(name) {
+    return new this._TodoList({
+      TodoItem: this._TodoItem,
+      nearParent: this._wrapper,
+      name: name || 'default name'
+    })
+	}
 	
 	renderTodoListsFromJSON(json) {
-		let lists =	json.map((currentList) => new this._TodoList({
-			TodoItem: this._TodoItem,
-			nearParent: this._container,
-			name: currentList.name
-		}).renderTodoItemsFromJSON(currentList.todos));
-		lists.forEach((list) => this._container.appendChild(list.getContainer()));
+		let lists =	json.map((currentList) => this.createList(currentList.name).renderTodoItemsFromJSON(currentList.todos));
+		lists.forEach((list) => this._wrapper.appendChild(list.getContainer()));
 		return this;
 		
 		/*return json.map((item) => new this._TodoList({
