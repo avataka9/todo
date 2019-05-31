@@ -17,9 +17,11 @@ export class TodoApp {
 		let app = document.createElement('div');
 		app.className = 'app';
     let body = document.createElement('div');
-    body.className = 'app__body swiper-wrapper';
+    body.className = 'app__body';
 		let wrapper = document.createElement('div');
-		wrapper.className = 'app__wrapper swiper-slide';
+		wrapper.className = 'app__wrapper';
+    let scrollbar = document.createElement('div');
+    scrollbar.className = 'app-scrollbar';
     let lists = document.createElement('div');
     lists.className = 'app__lists';
 		let add = document.createElement('div');
@@ -29,8 +31,9 @@ export class TodoApp {
 
 		body.appendChild(wrapper);
 		wrapper.appendChild(lists);
-		wrapper.appendChild(add);
-		app.appendChild(body);
+    wrapper.appendChild(add);
+    app.appendChild(body);
+    app.appendChild(scrollbar);
 
 		return app;
 	}
@@ -42,7 +45,7 @@ export class TodoApp {
 	_addButtonHandler(event) {
 		if (event.type === "click") {
       this._wrapper.appendChild(this.createList().getContainer());
-      this._container.dispatchEvent(new Event('needToUpdateSlider', {bubbles: true}));
+      this._container.dispatchEvent(new CustomEvent('needToUpdateSlider', {bubbles: true, detail: { width: this._wrapper.parentElement.offsetWidth }}));
 		} else if (event.type === "mouseenter") {
 
 		} else if (event.type === "mouseleave") {

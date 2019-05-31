@@ -2,9 +2,7 @@ import {TodoList} from "./components/todoList/index";
 import {TodoItem} from "./components/todoItem/index";
 import {TodoApp} from "./app";
 import data from "./../data/todoList.json";
-// import Swiper from "./../vendor/swiper/swiper"
-// import * as Swiper from "./../vendor/dist/js/swiper"
-import Swiper from 'swiper';
+import { Swiper, Scrollbar } from 'swiper/dist/js/swiper.esm.js';
 'use strict';
 
 
@@ -21,19 +19,27 @@ const APP = new TodoApp({
 APP.renderTodoListsFromJSON(data);
 entry.appendChild(APP.getContainer());
 
+Swiper.use([Scrollbar]);
 const slider = new Swiper(APP.getContainer(), {
   freeMode: true,
-  //direction: 'horizontal',
+  direction: 'horizontal',
   slidesPerView: 'auto',
-  //observer: true,
-  //observeSlideChildren: true,
+  grabCursor: true,
+  noSwipingClass: 'no-swipe',
+  observer: true,
+  wrapperClass: 'app__body',
+	slideClass: 'app__wrapper',
+  scrollbar: {
+    el: '.app-scrollbar',
+		hide: true,
+    dragClass: 'app-scrollbar__drag',
+  },
 });
 
-slider.update();
-
-window.addEventListener("needToUpdateSlider", function () {
-  slider.update();
-  console.log('updated');
+window.addEventListener("needToUpdateSlider", function (event) {
+	if (event.detail.width >= slider.width) {
+    slider.setTranslate(-(event.detail.width - slider.width));
+  }
 });
 
 

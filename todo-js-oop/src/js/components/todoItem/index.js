@@ -9,6 +9,7 @@ export class TodoItem {
 		this._description = config.description || 'write your description';
 		this._finished = config.finished || false;
 		this._container = this.createContainer(config.name);
+		this.editText = config.editText;
 		// this.deleteSelf = this.deleteSelf.bind(this);
 	}
 	
@@ -32,7 +33,7 @@ export class TodoItem {
 			finished: this._finished,
 			deleteSelf: this.deleteSelf
 		});*/
-		this._container.className = `todo-item ${this._finished ? 'todo-item--finished':''}`;
+		this._container.className = `todo-item ${this._finished ? 'todo-item--finished':''} no-swipe`;
 		
 		let checkbox = document.createElement('input');
 		checkbox.type = 'checkbox';
@@ -42,9 +43,11 @@ export class TodoItem {
 		let name = document.createElement('div');
 		name.className = 'todo-item__name';
 		name.textContent = this._name;
+		name.ondblclick = this.editText;
 		let description = document.createElement('div');
 		description.className = 'todo-item__description';
 		description.textContent = this._description;
+		description.ondblclick = this.editText;
 		
 		let deleteButton = document.createElement('input');
 		deleteButton.className = 'todo-item__delete';
