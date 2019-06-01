@@ -113,7 +113,7 @@ module.exports = function (env, argv) {
 		devtool: isDev ? 'source-map' : false,
 		devServer: {
 			contentBase: '.dist',
-      host: '192.168.0.80',
+      //host: '192.168.0.80',
       port: 8080,
       //quiet: true,
 			//hot: true
