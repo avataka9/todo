@@ -1,0 +1,129 @@
+
+.app {
+  display: flex;
+  align-items: flex-start;
+  //justify-content: center;
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+
+  &__body {
+    display: flex;
+    align-items: flex-start;
+    //width: 100%;
+    //overflow-x: scroll;
+    //white-space: nowrap;
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: flex-start;
+    padding: 30px;
+    //justify-content: center;
+  }
+
+  &__lists {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  &__add-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+    opacity: 0.5;
+    background: rgba(0,0,0,.05);
+    transition: opacity .3s, background .3s;
+    border-radius: 10px;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+      background: rgba(0,0,0,.1);
+    }
+  }
+
+  &__plus {
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    display: block;
+  }
+}
+
+.app-scrollbar {
+  width: 100%;
+  height: 5px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+
+  &__drag {
+    height: 5px;
+    background: blue;
+    border-radius: 100%/100%/100%/100%;
+  }
+}
+
+.todo-list {
+  display: inline-block;
+  border: 2px solid grey;
+  padding: 30px;
+  margin: 30px;
+  width: 300px;
+  cursor: initial;
+
+  &__head {
+
+  }
+
+  &__title {
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  &__body {
+    border: 1px solid grey;
+    padding: 10px;
+  }
+}
+
+.new-todo {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+
+  &__input {
+    width: 80%;
+  }
+
+  &__button {
+    width: 20%;
+  }
+}
+
+.todo-item {
+  border: 1px solid grey;
+  padding: 5px;
+  margin: 5px;
+
+
+  &__checkbox {}
+
+  &__name,
+  &__description {
+    overflow-x: scroll;
+    white-space: nowrap;
+  }
+
+  &__name {
+
+  }
+
+  &__description {
+
+  }
+
+  &__delete {}
+}
