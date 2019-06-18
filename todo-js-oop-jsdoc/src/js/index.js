@@ -6,5 +6,5 @@ document.appendChild(entryPoint);
 
 const TaskManager = new TaskManager();
 
-
+TaskManager.use();
 entryPoint.appendChild(TaskManager);

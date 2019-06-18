@@ -1,7 +1,10 @@
 'use strict';
 
+import {TaskList} from './components/taskList';
+import {TaskItem} from './components/taskItem';
+
 /**
- * Application for task managing? with lists of tasks
+ * Application for task managing. with lists of tasks
  * @class
  */
 export class TaskManager {
@@ -17,3 +20,5 @@ export class TaskManager {
 	
 	}
 }
+
+export {TaskItem, TaskList}

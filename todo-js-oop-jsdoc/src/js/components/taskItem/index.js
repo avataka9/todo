@@ -3,7 +3,7 @@
 /**
  * @class
  */
-export class Task {
+export class TaskItem {
 	
 	/**
 	 * @constructor
